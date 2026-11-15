@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080B12">
+<meta name="description" content="STYVEN ABOUT : tableau de bord web inspiré des interfaces console, par Styventhedev.">
+<title>STYVEN ABOUT</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+<nav id="nav" aria-label="Navigation principale">
+  <div class="brand"><span class="mark">SA</span><span class="brand-name">STYVEN ABOUT</span></div>
+  <button type="button" class="nav-item focusable active" data-page="home">Accueil</button>
+  <button type="button" class="nav-item focusable" data-page="console">Console</button>
+  <button type="button" class="nav-item focusable" data-page="storage">Stockage</button>
+  <button type="button" class="nav-item focusable" data-page="network">Réseau</button>
+  <button type="button" class="nav-item focusable" data-page="diagnostic">Diagnostic</button>
+  <button type="button" class="nav-item focusable" data-page="about">À propos</button>
+  <div class="pad-state" id="padState">Manette : vérification…</div>
+</nav>
+
+<main id="main">
+
+<!-- ACCUEIL -->
+<section id="page-home" class="page active">
+  <div class="hero">
+    <div class="wordmark"><span class="w1">STYVEN</span> <span class="w2">ABOUT</span></div>
+    <div class="sweep"></div>
+    <p class="lead">Ce tableau de bord montre ce que ton navigateur peut réellement lire de ta console ou de ton ordinateur, et indique clairement ce qu’il ne peut pas lire.</p>
+  </div>
+  <div class="card">
+    <div class="row"><span class="k">État du site</span><span class="v" id="homeState">JavaScript désactivé ou non chargé</span></div>
+    <div class="row"><span class="k">Version actuelle</span><span class="v"><span class="ver">1.0.0</span></span></div>
+    <div class="row"><span class="k">Date et heure locales</span><span class="v" id="clockVal">Non disponible</span></div>
+    <div class="row"><span class="k">Hébergement</span><span class="v" id="hostVal">Non disponible</span></div>
+  </div>
+  <div class="tiles">
+    <button type="button" class="tile focusable" data-go="console"><b>Console</b><span>Ce que le navigateur sait de l’appareil.</span></button>
+    <button type="button" class="tile focusable" data-go="storage"><b>Stockage</b><span>Calcule l’espace libre d’un disque.</span></button>
+    <button type="button" class="tile focusable" data-go="network"><b>Réseau</b><span>État de la connexion et test du site.</span></button>
+    <button type="button" class="tile focusable" data-go="diagnostic"><b>Diagnostic</b><span>Teste le navigateur et les commandes.</span></button>
+    <button type="button" class="tile focusable" data-go="about"><b>À propos</b><span>Le projet, son auteur, les crédits.</span></button>
+  </div>
+</section>
+
+<!-- CONSOLE -->
+<section id="page-console" class="page">
+  <h1 class="page-title">Console</h1>
+  <p class="lead">Seules les informations que le navigateur fournit sont affichées. Les valeurs absentes sont marquées « Non accessible ».</p>
+  <h2>Informations détectées</h2>
+  <div class="card" id="consoleRows"></div>
+  <h2>Capacités du navigateur</h2>
+  <div class="card" id="consoleCaps"></div>
+  <h2>Hors de portée d’un navigateur</h2>
+  <div class="card">
+    <div class="row"><span class="k">Modèle exact, numéro de série</span><span class="v na">Non accessible</span></div>
+    <div class="row"><span class="k">Espace disque réel</span><span class="v na">Non accessible</span></div>
+    <div class="row"><span class="k">Adresse IP, adresse MAC</span><span class="v na">Non accessible</span></div>
+    <div class="row"><span class="k">Température, ventilateur</span><span class="v na">Non accessible</span></div>
+  </div>
+</section>
+
+<!-- STOCKAGE -->
+<section id="page-storage" class="page">
+  <h1 class="page-title">Stockage</h1>
+  <p class="lead">Simulateur de calcul. Tu saisis les valeurs : rien n’est lu sur le disque de ta console.</p>
+  <div class="card">
+    <div class="field">
+      <label for="capVal">Capacité totale</label>
+      <div class="inline">
+        <input id="capVal" class="focusable" type="text" inputmode="decimal" autocomplete="off" placeholder="500">
+        <button type="button" id="capUnit" class="btn ghost focusable" data-unit-target="cap">Go</button>
+        <button type="button" class="chip focusable" data-fill="capVal" data-value="500" data-unit="GB">500 Go</button>
+        <button type="button" class="chip focusable" data-fill="capVal" data-value="1" data-unit="TB">1 To</button>
+        <button type="button" class="chip focusable" data-fill="capVal" data-value="2" data-unit="TB">2 To</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="usedVal">Espace utilisé</label>
+      <div class="inline">
+        <input id="usedVal" class="focusable" type="text" inputmode="decimal" autocomplete="off" placeholder="120">
+        <button type="button" id="usedUnit" class="btn ghost focusable" data-unit-target="used">Go</button>
+        <button type="button" class="chip focusable" data-step="-50">-50 Go</button>
+        <button type="button" class="chip focusable" data-step="-10">-10 Go</button>
+        <button type="button" class="chip focusable" data-step="10">+10 Go</button>
+        <button type="button" class="chip focusable" data-step="50">+50 Go</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="gameVal">Taille d’un jeu à installer (facultatif)</label>
+      <div class="inline">
+        <input id="gameVal" class="focusable" type="text" inputmode="decimal" autocomplete="off" placeholder="45">
+        <button type="button" id="gameUnit" class="btn ghost focusable" data-unit-target="game">Go</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="bar" id="stBarBox" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="stBar"></i></div>
+    <p class="msg" id="stMsg">Saisis une capacité pour lancer le calcul.</p>
+    <div id="stRows"></div>
+  </div>
+  <p class="note">Calcul en unités décimales (1 To = 1000 Go). Une console réserve souvent de l’espace pour le système : la capacité réellement utilisable peut être inférieure à celle annoncée.</p>
+</section>
+
+<!-- RÉSEAU -->
+<section id="page-network" class="page">
+  <h1 class="page-title">Réseau</h1>
+  <p class="lead">Informations réseau fournies par le navigateur, et un test de disponibilité du site.</p>
+  <div class="card" id="netRows"></div>
+  <h2>Test de disponibilité</h2>
+  <div class="card">
+    <button type="button" class="btn focusable" id="netTest">Tester la connexion au site</button>
+    <p class="msg" id="netResult">Aucun test lancé.</p>
+  </div>
+  <h2>Limites du navigateur</h2>
+  <div class="card">
+    <div class="row"><span class="k">Adresse IP</span><span class="v na">Non accessible</span></div>
+    <div class="row"><span class="k">Débit réel (Mb/s)</span><span class="v na">Non mesuré</span></div>
+    <div class="row"><span class="k">Réseau Wi-Fi ou câble</span><span class="v na">Souvent non accessible</span></div>
+  </div>
+  <p class="note">Le test envoie une requête vers ce site uniquement. Le temps affiché est le délai de réponse de cette requête, pas un débit.</p>
+</section>
+
+<!-- DIAGNOSTIC -->
+<section id="page-diagnostic" class="page">
+  <h1 class="page-title">Diagnostic</h1>
+  <p class="lead">Chaque test indique : disponible, indisponible ou non pris en charge.</p>
+  <div class="card">
+    <button type="button" class="btn focusable" id="diagRun">Relancer le diagnostic</button>
+    <p class="msg" id="diagSummary"></p>
+    <div id="diagRows"></div>
+  </div>
+  <h2>Test des commandes</h2>
+  <p class="lead">Appuie sur chaque touche du clavier ou de la manette. Une touche détectée reste allumée.</p>
+  <div class="card">
+    <div class="keys">
+      <span class="key" data-input="up">Haut</span>
+      <span class="key" data-input="down">Bas</span>
+      <span class="key" data-input="left">Gauche</span>
+      <span class="key" data-input="right">Droite</span>
+      <span class="key" data-input="confirm">Valider</span>
+      <span class="key" data-input="back">Retour</span>
+    </div>
+    <p class="msg" id="keysMsg">Aucune touche détectée pour l’instant.</p>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="page-about" class="page">
+  <h1 class="page-title">À propos</h1>
+  <div class="card">
+    <div class="row"><span class="k">Projet</span><span class="v">STYVEN ABOUT</span></div>
+    <div class="row"><span class="k">Développeur</span><span class="v">Styventhedev</span></div>
+    <div class="row"><span class="k">Version</span><span class="v"><span class="ver">1.0.0</span></span></div>
+    <div class="row"><span class="k">Technologies</span><span class="v">HTML5, CSS3, JavaScript sans bibliothèque</span></div>
+    <div class="row"><span class="k">Hébergement</span><span class="v">GitHub Pages, sans serveur</span></div>
+  </div>
+  <p class="lead">STYVEN ABOUT est un tableau de bord inspiré des interfaces système de console. Il ne simule aucune donnée : ce que le navigateur ne peut pas lire est indiqué comme tel.</p>
+  <h2>Crédits</h2>
+  <div class="card">
+    <div class="row"><span class="k">Conception et code</span><span class="v">Styventhedev</span></div>
+    <div class="row"><span class="k">Marque</span><span class="v">STYVENTHEDEV</span></div>
+    <div class="row"><span class="k">Inspiration</span><span class="v">Interfaces de menus de consoles de salon</span></div>
+  </div>
+  <p class="note">Projet indépendant, non affilié à Sony. « PlayStation » est une marque de Sony Interactive Entertainment. Le fonctionnement de la manette dans le navigateur de la PS4 n’est pas garanti sans test réel.</p>
+</section>
+
+</main>
+</div>
+<noscript><p class="noscript">STYVEN ABOUT a besoin de JavaScript pour fonctionner. Active-le dans ton navigateur.</p></noscript>
+<script src="js/app.js"></script>
+</body>
+</html>
